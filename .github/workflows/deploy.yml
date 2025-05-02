@@ -16,5 +16,7 @@ jobs:
         with:
           script: |
             # GitHubリポジトリの最新コードをpull
-            cd /root/github
+            cd /root/oshiben-be
             git pull origin main
+
+            source restart.sh
