@@ -6,14 +6,8 @@ services:
       context: .
     container_name: fastapi-app
     ports:
-      - "443:443"
+      - "8000:8000"  # 外部には公開しない（Nginx経由でアクセス）
     volumes:
       - ./app:/app
-      - /root/ssl:/ssl:ro
     working_dir: /app
-    command: >
-      uvicorn main:app
-      --host 0.0.0.0
-      --port 443
-      --ssl-keyfile /ssl/server.key
-      --ssl-certfile /ssl/server.crt
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
