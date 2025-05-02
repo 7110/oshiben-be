@@ -2,13 +2,22 @@ import os
 from openai import OpenAI
 from typing import Optional, List, Literal
 from pydantic import BaseModel, Field
+
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['http://localhost:3000', 'https://7110.github.io/'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 MODEL = 'gpt-4.1-mini'
