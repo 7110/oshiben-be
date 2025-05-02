@@ -39,7 +39,7 @@ def single_chat_with_openai(payload: SingleChatRequest):
     if payload.system_prompt:
         messages.append({'role': 'system', 'content': payload.system_prompt})
 
-    messages.append({'role': 'user', 'content': payload.message})
+    messages.append({'role': payload.role, 'content': payload.message})
 
     completion = client.beta.chat.completions.parse(
         model=MODEL,
@@ -68,7 +68,7 @@ def conversation_with_openai(payload: ConversationRequest):
 
     # ここを修正：payload.messages をそのまま messages に使う
     for msg in payload.messages:
-        messages.append({'role': 'user', 'content': msg.message})
+        messages.append({'role': msg.role, 'content': msg.message})
 
     completion = client.beta.chat.completions.parse(
         model=MODEL,
