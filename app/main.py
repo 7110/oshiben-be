@@ -13,7 +13,7 @@ load_dotenv()
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['http://localhost:3000', 'https://7110.github.io/'],
+    allow_origins=['http://localhost:3000', 'https://7110.github.io'],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
