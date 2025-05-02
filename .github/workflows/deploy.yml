@@ -20,5 +20,8 @@ jobs:
           port: 22
           script: |
             cd /root/oshiben-be
+
+            echo "${{ secrets.ENV_FILE_CONTENT }}" > .env
+
             git pull origin main
             source restart.sh
