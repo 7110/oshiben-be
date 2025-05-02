@@ -108,3 +108,13 @@ cd
 
 git clone git@github.com:7110/oshiben-be.git
 ```
+
+## ssh 化
+
+```bash
+mkdir -p /root/ssl
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /root/ssl/server.key \
+  -out /root/ssl/server.crt \
+  -subj "/CN=localhost"
+```
