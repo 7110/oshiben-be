@@ -60,12 +60,14 @@ def single_chat_with_openai(payload: SingleChatRequest):
 
     return parsed_message
 
-class ConversationResponseMessage(ResponseMessage):
-    tips: Optional[str] = Field(default=None)
-
 class ConversationRequest(BaseModel):
     system_prompt: Optional[str] = Field(default=None)
     messages: List[RequestMessage]
+
+class ConversationResponseMessage(ResponseMessage):
+    tips: Optional[str] = Field(default=None)
+    japanese_translation: str = Field(..., description='日本語訳')
+    knowledge: str = Field(..., description='英語学習をする日本人が覚えるべき日常で使える単語/フレーズ及び意味の解説/日常で使用する際のアドバイス')
 
 @app.post('/v1/conversation')
 def conversation_with_openai(payload: ConversationRequest):
