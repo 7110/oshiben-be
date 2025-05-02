@@ -1,0 +1,20 @@
+name: Deploy to ConoHa VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          script: |
+            # GitHubリポジトリの最新コードをpull
+            cd /root/github
+            git pull origin main
