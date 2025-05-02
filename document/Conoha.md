@@ -116,4 +116,23 @@ sudo yum install -y epel-release
 sudo yum install -y nginx
 sudo systemctl enable nginx
 sudo systemctl start nginx
+
+sudo vi /etc/nginx/conf.d/oshiben.conf
+"""
+server {
+    listen 80;
+    server_name 163.44.127.243.nip.io;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+"""
+
+sudo nginx -t
+sudo systemctl reload nginx
+
+sudo yum install -y certbot python3-certbot-nginx
 ```
